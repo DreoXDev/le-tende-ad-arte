@@ -22,6 +22,16 @@ Essendo un sito statico ultra-veloce, non c'è alcun macchinoso database o codic
   5. Il cliente riceverà una primissima email di attivazione da FormSubmit. Gli basterà premere "Attiva questo Form" e da quel momento in poi tutte le lead arriveranno perfette come tabella ordinata! (Successivamente il cliente può anche attivare l'offuscamento dell'indirizzo email seguendo le istruzioni incluse nella prima mail, per evitare lo spam da bot).
 - **Privacy Policy:** I testi legali sono facilmente localizzabili nel file base `src/pages/privacy.astro`.
 
+### Cookie Banner e Google Analytics 4 (GDPR Compliant)
+Il sito è equipaggiato con una gestione avanzata e statica per la conformità GDPR (Google Consent Mode V2).
+1. **Come attivare Google Analytics:** Nessuno script aggiuntivo è necessario. Apri il file `src/layouts/Layout.astro`. Alla riga 73 e 78 troverai un codice segnaposto: `G-XXXXXXXXXX`. Sostituisci questo valore con il vero ID di Tracciamento fornito da tuo account Google Analytics.
+2. **Come funzionano i permessi:** Il codice è scritto in modo che di base il consenso sia impostato su `denied` (tutto bloccato). Solo nel momento in cui l'utente clicca "Accetta" sul banner dei cookie, Astro invierà l'ordine `granted` a Google sbloccando le analytics in modo del tutto legale.
+
+### Aspetto dei Link su Social e Chat (OpenGraph SEO)
+Abbiamo studiato un sistema dinamico per fare in modo che se il link del sito viene copiato su **WhatsApp, iMessage, Facebook o LinkedIn**, "non faccia schifo" e non appaia solo come un generico URL testuale vuoto.
+- **Preview Dinamiche:** Aprendo il file base `Layout.astro` noterai le direttive `<meta property="og:...>`. Questo sistema intercetta il link e dice al social network che titolo ed immagine scaricare come anteprima.
+- **Pagine Prodotti in Chat:** La parte più bella è che il codice è adattivo! Se invii via WhatsApp il link generico alla Home (es `letendeadarte.it`), apparirà la foto di copertina generale del negozio. Ma se l'utente naviga su una specifica tenda e copia l'URL (es `letendeadarte.it/prodotti/zanzariere`), *l'anteprima WhatsApp cambierà automaticamente, prelevando in diretta l'immagine di anteprima di quello specifico prodotto associato*. Nessuna configurazione extra richiesta da parte tua!
+
 ### Hosting e Dominio (Messa in Pubblico)
 Il sito è già configurato all'interno e pronto, ottimizzato in particolare per server Serverless / JAMstack gratuiti o economici come **Vercel** o **Netlify**. Le sue performance a 100/100 si accoppieranno perfettamente con l'effettivo dominio configurato globalmente per Google in `astro.config.mjs` (`https://letendeadarte.it`).
 

@@ -53,6 +53,29 @@ const siteTitle = title.includes("Le Tende ad Arte") ? title : `${title} | Le Te
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 		
+		<!-- Google Consent Mode v2 & Analytics -->
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			
+			// Default consent setup based on GDPR (Tutto bloccato di default)
+			gtag('consent', 'default', {
+				'ad_storage': 'denied',
+				'ad_user_data': 'denied',
+				'ad_personalization': 'denied',
+				'analytics_storage': 'denied'
+			});
+		</script>
+		
+		<!-- Sostituire G-XXXXXXXXXX con il vero ID di tracciamento Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-XXXXXXXXXX');
+		</script>
+		
 		<!-- Structured Data -->
 		<script type="application/ld+json" is:inline>
 		{
