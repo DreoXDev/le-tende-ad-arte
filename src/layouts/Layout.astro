@@ -1,0 +1,112 @@
+---
+import "@/styles/global.css";
+import { ClientRouter } from "astro:transitions";
+import Preloader from "@/components/ui/Preloader.astro";
+import CookieBanner from "@/components/ui/CookieBanner.astro";
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Tende da sole e zanzariere di alta qualità" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="it">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/manifest.webmanifest" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href="https://letendeadarte.it/" />
+		<ClientRouter />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://letendeadarte.it/" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content="https://letendeadarte.it/images/modern_awning.png" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://letendeadarte.it/" />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content="https://letendeadarte.it/images/modern_awning.png" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+		
+		<!-- Structured Data -->
+		<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "LocalBusiness",
+		  "name": "Le Tende ad Arte",
+		  "image": "https://letendeadarte.it/images/logo.png",
+		  "@id": "https://letendeadarte.it",
+		  "url": "https://letendeadarte.it",
+		  "telephone": "+390294969152",
+		  "address": {
+			"@type": "PostalAddress",
+			"streetAddress": "Via XX Settembre, 12",
+			"addressLocality": "Abbiategrasso",
+			"postalCode": "20081",
+			"addressRegion": "MI",
+			"addressCountry": "IT"
+		  },
+		  "geo": {
+			"@type": "GeoCoordinates",
+			"latitude": 45.39835,
+			"longitude": 8.91965
+		  },
+		  "openingHoursSpecification": {
+			"@type": "OpeningHoursSpecification",
+			"dayOfWeek": [
+			  "Monday",
+			  "Tuesday",
+			  "Wednesday",
+			  "Thursday",
+			  "Friday",
+			  "Saturday"
+			],
+			"opens": "09:00",
+			"closes": "19:00"
+		  }
+		}
+		</script>
+	</head>
+	<body class="min-h-screen bg-background font-sans antialiased overflow-x-hidden">
+		<Preloader />
+		<slot />
+		<CookieBanner />
+		
+		<script>
+			import { gsap } from "gsap";
+			import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+			gsap.registerPlugin(ScrollTrigger);
+
+			// Global animations or shared logic can go here
+		</script>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--font-sans: 'Inter', sans-serif;
+		--font-heading: 'Playfair Display', serif;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: var(--font-heading);
+	}
+</style>

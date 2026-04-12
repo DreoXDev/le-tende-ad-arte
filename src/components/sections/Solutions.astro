@@ -1,0 +1,106 @@
+---
+import { Button } from "@/components/ui/button";
+import ProductCard from "@/components/ui/ProductCard.astro";
+import { ArrowRight, Sun, Wind, Home, Box, Settings, ShieldCheck } from "lucide-astro";
+
+const products = [
+	{
+		title: "Tende da Interno",
+		description: "Realizzate su misura con tessuti di alta qualità, disponibili in una vasta gamma di colori, trame e stili: a pacchetto, arricciate, a pannello.",
+		image: "/images/interior_blinds_real.jpg",
+		icon: Sun,
+		tag: "Eleganza",
+		slug: "tende-da-interno"
+	},
+	{
+		title: "Scorritenda",
+		description: "Bastoni e binari dal design classico o moderno per scorrimenti fluidi e installazioni impeccabili su ogni finestra.",
+		image: "/images/scorritenda.png",
+		icon: Settings,
+		tag: "Precisione",
+		slug: "scorritenda"
+	},
+	{
+		title: "Tende Tecniche",
+		description: "Soluzioni filtranti o oscuranti, rulli e pacchetti tecnici ideali per valorizzare luce e spazi in uffici o living moderni.",
+		image: "/images/technical_blinds_real.jpg",
+		icon: Sun,
+		tag: "Funzionalità",
+		slug: "tende-tecniche"
+	},
+	{
+		title: "Tessuti e Divani",
+		description: "Rivestimenti artigianali per divani e poltrone. Rinnova i tuoi arredi con tessuti tecnici o decorativi di pregio.",
+		image: "/images/sofa_fabrics.jpg",
+		icon: Box,
+		tag: "Comfort",
+		slug: "tessuti-per-divani"
+	},
+	{
+		title: "Zanzariere",
+		description: "Sistemi a scorrimento fluido, magnetico o a frizione. Protezione totale senza rinunciare alla visibilità.",
+		image: "/images/mosquito_net_real.jpg",
+		icon: Wind,
+		tag: "Protezione",
+		slug: "zanzariere"
+	}
+];
+---
+
+<section id="prodotti" class="py-24 bg-background scroll-mt-20">
+	<div class="container mx-auto px-6">
+		<div class="mb-16">
+			<div class="max-w-2xl">
+				<h2 class="text-3xl font-bold tracking-tight md:text-5xl mb-4 font-heading">Le Nostre Soluzioni</h2>
+				<p class="text-muted-foreground text-lg">Esplora la nostra gamma di prodotti premium pensati per durare nel tempo.</p>
+			</div>
+		</div>
+		
+		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+			{products.map((product) => (
+				<ProductCard {...product} />
+			))}
+		</div>
+	</div>
+</section>
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	document.addEventListener("astro:page-load", () => {
+		if (!document.getElementById("prodotti")) return;
+
+		// Section header animation
+		gsap.to("#solutions-header", {
+			scrollTrigger: {
+				trigger: "#prodotti",
+				start: "top 80%",
+				toggleActions: "play none none none",
+			},
+			opacity: 1,
+			y: 0,
+			duration: 1,
+			ease: "power3.out",
+		});
+
+		// Product cards staggered animation
+		const cards = document.querySelectorAll(".product-card");
+		if (cards.length > 0) {
+			gsap.to(".product-card", {
+				scrollTrigger: {
+					trigger: ".product-grid",
+					start: "top 80%",
+					toggleActions: "play none none none",
+				},
+				opacity: 1,
+				y: 0,
+				duration: 0.8,
+				stagger: 0.15,
+				ease: "power3.out",
+			});
+		}
+	});
+</script>

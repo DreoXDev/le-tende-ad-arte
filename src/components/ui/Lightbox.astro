@@ -1,0 +1,87 @@
+---
+---
+
+<div id="lightbox" class="fixed inset-0 z-[1000] hidden bg-black/95 backdrop-blur-sm transition-opacity duration-300 opacity-0 items-center justify-center p-4 md:p-12">
+	<button id="lightbox-close" class="absolute top-6 right-6 text-white hover:text-primary transition-colors z-20">
+		<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+	</button>
+	
+	<button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-primary transition-colors hidden md:block">
+		<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+	</button>
+	
+	<button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-primary transition-colors hidden md:block">
+		<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+	</button>
+
+	<div class="relative w-full h-full flex items-center justify-center">
+		<img id="lightbox-img" src="" alt="Zoomed view" class="max-w-full max-h-full object-contain shadow-2xl rounded-sm" />
+	</div>
+</div>
+
+<script>
+	function initLightbox() {
+		const lightbox = document.getElementById("lightbox");
+		const img = document.getElementById("lightbox-img") as HTMLImageElement;
+		const closeBtn = document.getElementById("lightbox-close");
+		const prevBtn = document.getElementById("lightbox-prev");
+		const nextBtn = document.getElementById("lightbox-next");
+		
+		const galleryItems = document.querySelectorAll(".gallery-item img");
+		let currentIndex = -1;
+
+		if (!lightbox || !img) return;
+
+		galleryItems.forEach((item, index) => {
+			item.parentElement?.addEventListener("click", () => {
+				currentIndex = index;
+				showImage(item as HTMLImageElement);
+			});
+		});
+
+		function showImage(sourceImg: HTMLImageElement) {
+			img.src = sourceImg.src;
+			lightbox?.classList.remove("hidden");
+			setTimeout(() => lightbox?.classList.add("opacity-100", "flex"), 10);
+			document.body.style.overflow = "hidden";
+		}
+
+		function hideLightbox() {
+			lightbox?.classList.remove("opacity-100");
+			setTimeout(() => {
+				lightbox?.classList.add("hidden");
+				lightbox?.classList.remove("flex");
+			}, 300);
+			document.body.style.overflow = "auto";
+		}
+
+		closeBtn?.addEventListener("click", hideLightbox);
+		lightbox.addEventListener("click", (e) => {
+			if (e.target === lightbox || e.target === lightbox.querySelector('div')) hideLightbox();
+		});
+
+		// Navigation
+		nextBtn?.addEventListener("click", (e) => {
+			e.stopPropagation();
+			currentIndex = (currentIndex + 1) % galleryItems.length;
+			img.src = (galleryItems[currentIndex] as HTMLImageElement).src;
+		});
+
+		prevBtn?.addEventListener("click", (e) => {
+			e.stopPropagation();
+			currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+			img.src = (galleryItems[currentIndex] as HTMLImageElement).src;
+		});
+
+		// Keyboard
+		document.addEventListener("keydown", (e) => {
+			if (lightbox.classList.contains("hidden")) return;
+			if (e.key === "Escape") hideLightbox();
+			if (e.key === "ArrowRight") nextBtn?.click();
+			if (e.key === "ArrowLeft") prevBtn?.click();
+		});
+	}
+
+	initLightbox();
+	document.addEventListener("astro:after-swap", initLightbox);
+</script>

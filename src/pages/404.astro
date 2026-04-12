@@ -1,0 +1,51 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Navbar from "@/components/layout/Navbar.astro";
+import Footer from "@/components/layout/Footer.astro";
+import { Button } from "@/components/ui/button";
+import { Home, ArrowLeft } from "lucide-astro";
+---
+
+<Layout title="Pagina Non Trovata | Le Tende ad Arte" description="Spiacenti, la pagina che stai cercando non esiste. Torna alla home per esplorare le nostre tende e tessuti su misura.">
+	<Navbar />
+	
+	<main class="min-h-[80vh] flex items-center justify-center pt-20">
+		<div class="container mx-auto px-6 text-center">
+			<div class="relative inline-block mb-8">
+				<h1 id="error-code" class="text-[12rem] md:text-[18rem] font-bold font-heading text-primary/5 select-none leading-none">
+					404
+				</h1>
+				<div class="absolute inset-0 flex items-center justify-center">
+					<div id="error-message" class="space-y-4">
+						<h2 class="text-3xl md:text-5xl font-bold font-heading">Pagina Non <span class="text-primary italic">Trovata.</span></h2>
+						<p class="text-muted-foreground text-lg max-w-md mx-auto">
+							Spiacenti, il tessuto che stai cercando non sembra essere disponibile in questa posizione.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div id="error-actions" class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 opacity-0">
+				<a href="/">
+					<Button size="lg" className="rounded-full px-8 font-bold shadow-lg">
+						<Home class="mr-2 h-5 w-5" /> Torna alla Home
+					</Button>
+				</a>
+				<button onclick="history.back()" class="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors font-medium">
+					<ArrowLeft class="h-5 w-5" /> Torna indietro
+				</button>
+			</div>
+		</div>
+	</main>
+
+	<Footer />
+</Layout>
+
+<script>
+	import { gsap } from "gsap";
+
+	// Simple entrance animation
+	gsap.from("#error-code", { opacity: 0, scale: 0.8, duration: 1.5, ease: "power4.out" });
+	gsap.from("#error-message", { opacity: 0, y: 30, duration: 1, delay: 0.5, ease: "power3.out" });
+	gsap.to("#error-actions", { opacity: 1, y: 0, duration: 1, delay: 1, ease: "power2.out" });
+</script>

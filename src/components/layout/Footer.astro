@@ -1,0 +1,47 @@
+---
+import { Instagram, Facebook, MessageCircle } from "lucide-astro";
+---
+<footer class="border-t py-20 bg-background">
+	<div class="container mx-auto px-6">
+		<div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 mb-20">
+			<div class="lg:col-span-2">
+				<div class="flex items-center gap-4 mb-8">
+					<img src="/images/logo.png" alt="Le Tende ad Arte" class="h-16 w-16 object-contain dark:invert opacity-80" />
+					<div class="text-3xl font-bold font-heading tracking-tighter uppercase leading-none">
+						LE TENDE AD <br/><span class="text-primary italic">ARTE</span>
+					</div>
+				</div>
+				<p class="text-muted-foreground max-w-md text-base leading-relaxed mb-8">
+					Le Tende ad Arte di Garegnani Stefano. <br/>
+					Esperienza artigianale nella realizzazione di tende su misura e rivestimenti dal 1970.
+				</p>
+				<div class="flex gap-4">
+					<a href="https://www.instagram.com/letendeadarte/" target="_blank" class="h-10 w-10 rounded-full bg-secondary flex items-center justify-center hover:bg-primary hover:text-white transition-all"><Instagram class="h-5 w-5" /></a>
+					<a href="https://www.facebook.com/tendeadarte/" target="_blank" class="h-10 w-10 rounded-full bg-secondary flex items-center justify-center hover:bg-primary hover:text-white transition-all"><Facebook class="h-5 w-5" /></a>
+					<a href="https://wa.me/393462138048" target="_blank" class="h-10 w-10 rounded-full bg-secondary flex items-center justify-center hover:bg-primary hover:text-white transition-all"><MessageCircle class="h-5 w-5" /></a>
+				</div>
+			</div>
+			<div>
+				<h4 class="font-bold mb-6 uppercase text-sm tracking-[0.2em] text-foreground">Link Rapidi</h4>
+				<ul class="space-y-4 text-base text-muted-foreground">
+					<li><a href="#prodotti" class="hover:text-primary transition-colors">I Nostri PRODOTTI</a></li>
+					<li><a href="#chi-siamo" class="hover:text-primary transition-colors">Chi Siamo</a></li>
+					<li><a href="#recensioni" class="hover:text-primary transition-colors">Recensioni</a></li>
+					<li><a href="#preventivo" class="hover:text-primary transition-colors">Richiedi Preventivo</a></li>
+				</ul>
+			</div>
+			<div>
+				<h4 class="font-bold mb-6 uppercase text-sm tracking-[0.2em] text-foreground">Contatti</h4>
+				<ul class="space-y-4 text-base text-muted-foreground">
+					<li class="flex items-start gap-3">Via XX Settembre, 12<br/>20081 Abbiategrasso (MI)</li>
+					<li><a href="tel:+390294969152" class="hover:text-primary transition-colors">02 94969152</a></li>
+					<li><a href="tel:+393462138048" class="hover:text-primary transition-colors">346 2138048</a></li>
+					<li><a href="mailto:letendeadarte@gmail.com" class="hover:text-primary transition-colors">letendeadarte@gmail.com</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="border-t pt-10 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+			<p class="text-muted-foreground text-sm">© 2026 Le Tende ad Arte - P.IVA 11522420964. Privacy Policy / Cookie Policy</p>
+		</div>
+	</div>
+</footer>

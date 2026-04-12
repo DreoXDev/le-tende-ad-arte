@@ -1,0 +1,584 @@
+/* SEZIONI GENERALI (tutte tranne la sezione contatti) */
+section:not(.contatti) {
+    padding: 80px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+
+/* CHI SIAMO - Testo a sinistra, foto piccola a destra */
+.chi-siamo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.chi-siamo-testo {
+    flex: 1.3; /* più spazio al testo */
+}
+
+.chi-siamo-foto {
+    flex: 0.7; /* meno spazio alla foto */
+    display: flex;
+    justify-content: flex-end;
+}
+
+.chi-siamo-foto img {
+    width: 100%;
+    max-width: 260px; /* FOTO PICCOLA */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .chi-siamo-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .chi-siamo-foto {
+        justify-content: center;
+    }
+
+    .chi-siamo-foto img {
+        max-width: 220px;
+    }
+}
+
+
+/* TITOLI DELLE SEZIONI */
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* GRID GENERALE (Prodotti + Galleria) */
+.servizi-grid,
+.galleria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+/* CARD PRODOTTI CON FOTO DI SFONDO */
+.servizio-bg {
+    position: relative;
+    height: 260px; /* stessa altezza della foto del Chi Siamo */
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+}
+
+/* OVERLAY SCURO PER LEGGERE IL TESTO */
+.servizio-overlay {
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0));
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* TITOLO */
+.servizio-overlay h3 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+/* BOTTONE */
+.btn-scopri {
+    display: inline-block;
+    padding: 8px 18px;
+    background-color: #1a4d8f;
+    color: white;
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: none;
+    width: fit-content;
+    transition: 0.3s ease;
+}
+
+.btn-scopri:hover {
+    background-color: #163d72;
+}
+
+.sezione-centrale {
+    background: linear-gradient(to bottom, #e8f2ff, #ffffff);
+    padding: 80px 20px;
+}
+/* TITOLI SEZIONI AGGIORNATI */
+.servizi h2 {
+    font-size: 4.5rem;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 40px;
+}
+
+.chi-siamo h2 {
+    font-size: 4.5rem;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 25px;
+}
+
+.chi-siamo-testo p {
+    font-size: 1.25rem;
+    line-height: 1.75;
+    font-weight: 300;
+}
+
+/* CARD PREVENTIVO */
+.preventivo {
+    max-width: 700px;
+    margin: 100px auto;
+    padding: 50px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 35px rgba(0,0,0,0.12);
+    animation: fadeIn 0.6s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* ANIMAZIONE ENTRATA */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* TITOLO */
+.preventivo h2 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 35px;
+    font-family: 'Playfair Display', serif;
+}
+
+/* FORM */
+.form-preventivo .campo {
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* LABEL */
+.form-preventivo label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 1.1rem;
+}
+
+/* INPUT E TEXTAREA */
+.form-preventivo input,
+.form-preventivo textarea {
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #c9c9c9;
+    font-size: 1.05rem;
+    transition: 0.3s ease;
+    background: #f8f8f8;
+}
+
+.form-preventivo input:focus,
+.form-preventivo textarea:focus {
+    border-color: #1a4d8f;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(26,77,143,0.15);
+}
+
+/* CONSENSO */
+.consenso-wrapper {
+    margin-top: 10px;
+}
+
+.consenso {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.consenso input {
+    margin-top: 3px;
+}
+
+/* LINK PRIVACY */
+.consenso {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    flex-wrap: wrap; /* permette il ritorno a capo quando serve */
+    white-space: normal; /* permette al testo di andare a capo */
+}
+
+.consenso input {
+    margin-top: 3px;
+}
+
+.link-privacy {
+    color: #1a4d8f;
+    font-weight: 600;
+    text-decoration: underline;
+    white-space: nowrap; /* il link NON si spezza */
+}
+
+.link-privacy:hover {
+    color: #163d72;
+}
+
+/* SEZIONE SERVIZI (come CHI SIAMO) */
+.servizi {
+    padding: 80px 20px;
+    max-width: 1300px;
+    margin: auto;
+}
+
+.servizi-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+/* COLONNA SINISTRA */
+.servizi-left {
+    flex: 1.2;
+}
+
+.servizi-left h2 {
+    font-size: 4rem;
+    margin-bottom: 25px;
+}
+
+.servizi-left p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.servizi-left ul {
+    list-style: none;
+    padding: 0;
+}
+
+.servizi-left li {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+/* COLONNA DESTRA (preventivo) */
+.servizi-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Override leggero per adattarlo alla colonna */
+.servizi-right .preventivo {
+    margin: 0;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .servizi-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .servizi-right {
+        justify-content: center;
+    }
+}
+.freccia-animata span {
+    display: inline-block;
+    margin-left: 6px;
+    transition: transform 0.2s ease;
+}
+
+.freccia-animata:hover span {
+    transform: translateX(4px);
+}
+
+
+
+/* BOTTONE INVIA */
+.btn-invia {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    background-color: #1a4d8f;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn-invia:hover {
+    background-color: #163d72;
+    transform: translateY(-2px);
+}
+
+/* SEZIONE CONTATTI — FULL WIDTH */
+.contatti {
+    background: #000; /* nero pieno */
+    color: white;
+    width: 100%;
+    margin: 0;
+    padding: 0; /* reset totale */
+}
+
+/* CONTENITORE INTERNO CENTRATO */
+.contatti-container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 80px 40px 60px 40px; /* padding interno */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+/* COPYRIGHT */
+.copyright {
+    text-align: center;
+    padding: 40px 0 60px 0; /* padding verticale */
+    font-size: 0.9rem;
+    opacity: 0.8;
+    background: #000; /* assicura continuità */
+}
+
+/* COLONNA SINISTRA */
+.contatti-left {
+    flex: 1;
+}
+
+.contatti-logo {
+    width: 140px;
+    margin-bottom: 15px;
+}
+
+.ragione-sociale {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+/* COLONNA CENTRALE — FIX PER METTERE TUTTO IN COLONNA */
+.contatti-center {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* 🔥 forza la colonna verticale */
+    align-items: center;    /* 🔥 centra tutto */
+}
+/* Link nella colonna contatti: bianchi, niente underline */
+.contatti-center a {
+    color: white !important;
+    text-decoration: none;
+}
+
+.contatti-center a:hover {
+    text-decoration: underline;
+}
+
+
+/* MAPPA */
+.footer-map {
+    margin-top: 15px;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* COLONNA RECENSIONI */
+.contatti-reviews {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Tasto Google dentro la colonna recensioni */
+.contatti-reviews .google-reviews-btn a {
+    display: inline-block;
+    background-color: #1a73e8;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.25s ease;
+}
+
+.contatti-reviews .google-reviews-btn a:hover {
+    background-color: #1558b0;
+}
+
+/* Recensioni */
+.contatti-reviews .review {
+    max-width: 220px;
+}
+
+.contatti-reviews .stars {
+    color: #f4c430;
+    font-size: 0.75rem;
+}
+
+.contatti-reviews p {
+    font-size: 0.7rem;
+    margin: 0;
+    line-height: 1.2;
+    opacity: 0.9;
+}
+
+.contatti-reviews .author {
+    font-size: 0.65rem;
+    opacity: 0.7;
+}
+
+
+
+/* COLONNA DESTRA */
+.contatti-right {
+    flex: 1;
+    text-align: right;
+}
+
+.contatti-right h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+}
+
+.contatti-right {
+    flex: 1;
+    text-align: center; /* centrato */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centra tutto */
+    gap: 20px; /* spazio tra titolo e icone */
+}
+
+/* SOCIAL ICONS (Uiverse) */
+.social-card {
+  display: flex;
+  gap: 20px;
+  height: 70px;
+  justify-content: center; /* centra le icone */
+}
+
+.social-card .social-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  transition: 0.25s;
+}
+
+.social-card svg {
+  width: 28px;
+  height: 28px;
+  color: white;
+  z-index: 2;
+}
+
+.social-link svg path {
+    fill: white !important;
+}
+
+/* Hover */
+.social-card .instagram:hover {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  animation: bounce_613 0.4s linear;
+}
+.social-card .instagram svg {
+  width: 36px;
+  height: 36px;
+}
+
+.social-card .whatsapp:hover {
+  background: #12a50b;
+  animation: bounce_613 0.4s linear;
+}
+
+.social-card .facebook:hover {
+  background: #1877f2;
+  animation: bounce_613 0.4s linear;
+}
+
+@keyframes bounce_613 {
+  40% { transform: scale(1.4); }
+  60% { transform: scale(0.8); }
+  80% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    .contatti-container {
+        flex-direction: column;
+        text-align: center;
+        align-items: center; /* CENTRA TUTTO */
+    }
+
+    .contatti-left,
+    .contatti-center,
+    .contatti-right {
+        width: 100%;
+        text-align: center; /* centra il contenuto */
+    }
+
+    .social-card {
+        justify-content: center; /* centra le icone */
+    }
+}
+html {
+    scroll-behavior: smooth;
+}
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #0a3d62;
+  color: white;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: opacity 0.3s ease;
+  z-index: 999;
+}
+
+.back-to-top.show {
+  display: flex;
+  opacity: 1;
+}

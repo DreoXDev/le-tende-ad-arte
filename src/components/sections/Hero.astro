@@ -1,0 +1,83 @@
+---
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Instagram, Facebook, MessageCircle } from "lucide-astro";
+---
+
+<section class="relative flex min-h-screen items-center justify-center overflow-hidden bg-background">
+	<!-- Main Background Image -->
+	<div class="absolute inset-0 z-0 overflow-hidden">
+		<img 
+			id="hero-bg"
+			src="/images/hero_bg.jpg" 
+			alt="Tende da sole moderne di design - Le Tende ad Arte Abbiategrasso" 
+			class="h-[120%] w-full object-cover brightness-[0.7] -translate-y-[10%]"
+		/>
+		<!-- Premium Dark Overlay -->
+		<div class="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background"></div>
+		<div class="absolute inset-0 bg-black/20"></div>
+	</div>
+
+	<div class="container mx-auto relative z-10 px-6 pt-20">
+		<div class="mx-auto max-w-4xl text-center font-heading">
+			<h1 id="hero-title" class="mb-4 text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground md:text-7xl lg:text-9xl opacity-0 translate-y-10 uppercase leading-[1.1] overflow-visible">
+				L'Arte del <br/> 
+				<span class="inline-block bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent italic pr-[0.3em] overflow-visible pb-2 select-none">Tessuto su Misura.</span>
+			</h1>
+			<p id="hero-subtitle" class="mb-10 text-base sm:text-lg text-muted-foreground md:text-xl lg:text-2xl max-w-2xl mx-auto opacity-0 translate-y-10 leading-relaxed font-sans px-4 sm:px-0">
+				Da oltre cinquant'anni vestiamo la tua casa con eleganza, precisione e passione. Tende da interno, tessuti d'arredo e schermature tecniche realizzate ad arte.
+			</p>
+			<div class="flex flex-col items-center justify-center gap-8 w-full px-6 sm:px-0">
+				<div id="hero-cta" class="w-full sm:w-auto opacity-0 translate-y-10">
+					<a href="/#prodotti" class="block w-full">
+						<Button size="lg" className="w-full sm:w-auto rounded-full px-12 h-14 shadow-lg hover:shadow-primary/20 transition-all active:scale-95 text-lg font-bold cursor-pointer py-3">
+							Scopri di più <ArrowRight class="ml-2 h-5 w-5" />
+						</Button>
+					</a>
+				</div>
+				
+				<div class="flex items-center gap-6">
+					<a href="https://www.instagram.com/letendeadarte/" target="_blank" class="hero-social text-muted-foreground hover:text-primary transition-all hover:scale-110 active:scale-90 p-2 opacity-0 translate-y-10" aria-label="Instagram">
+						<Instagram class="h-6 w-6 sm:h-7 sm:w-7" />
+					</a>
+					<a href="https://www.facebook.com/tendeadarte/" target="_blank" class="hero-social text-muted-foreground hover:text-primary transition-all hover:scale-110 active:scale-90 p-2 opacity-0 translate-y-10" aria-label="Facebook">
+						<Facebook class="h-6 w-6 sm:h-7 sm:w-7" />
+					</a>
+					<a href="https://wa.me/393462138048" target="_blank" class="hero-social text-muted-foreground hover:text-primary transition-all hover:scale-110 active:scale-90 p-2 opacity-0 translate-y-10" aria-label="WhatsApp">
+						<MessageCircle class="h-6 w-6 sm:h-7 sm:w-7" />
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	document.addEventListener("astro:page-load", () => {
+		// Only run if elements exist on this page
+		if (document.getElementById("hero-title")) {
+			// Hero content entry
+			const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+			tl.to("#hero-title", { opacity: 1, y: 0, duration: 1.2, delay: 0.5 })
+			  .to("#hero-subtitle", { opacity: 1, y: 0, duration: 1 }, "-=0.8")
+			  .to("#hero-cta", { opacity: 1, y: 0, duration: 1 }, "-=0.6")
+			  .to(".hero-social", { opacity: 1, y: 0, duration: 1, stagger: 0.1 }, "-=0.4");
+			
+			// Parallax effect
+			gsap.to("#hero-bg", {
+				scrollTrigger: {
+					trigger: "#home",
+					start: "top top",
+					end: "bottom top",
+					scrub: true
+				},
+				y: 150,
+				ease: "none"
+			});
+		}
+	});
+</script>

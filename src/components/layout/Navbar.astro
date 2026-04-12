@@ -1,0 +1,136 @@
+---
+import { Button } from "@/components/ui/button";
+import { ChevronDown, Menu, X } from "lucide-astro";
+import { products } from "@/data/products";
+---
+
+<nav class="fixed top-0 z-50 w-full border-b border-white/10 bg-white/5 backdrop-blur-md transition-colors" id="main-nav">
+	<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+		<a href="/" class="flex items-center gap-3 select-none hover:opacity-80 transition-opacity cursor-pointer relative z-50">
+			<img src="/images/logo.png" alt="Le Tende ad Arte" class="h-10 w-10 object-contain dark:invert" />
+			<div class="text-2xl font-bold tracking-tighter text-foreground font-heading uppercase leading-none mt-1">
+				LE TENDE AD <span class="text-primary italic">ARTE</span>
+			</div>
+		</a>
+		
+		<!-- Desktop Menu -->
+		<div class="hidden items-center space-x-8 md:flex">
+			<div class="group relative">
+				<a href="/#prodotti" class="flex items-center gap-1 text-sm font-medium hover:text-primary transition-colors py-4">
+					Prodotti <ChevronDown class="h-4 w-4 transition-transform group-hover:rotate-180" />
+				</a>
+				<div class="absolute left-0 top-full w-56 origin-top-left scale-90 opacity-0 invisible group-hover:scale-100 group-hover:opacity-100 group-hover:visible transition-all duration-200 bg-white/95 dark:bg-card/95 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl p-2 py-3">
+					<div class="flex flex-col gap-1">
+						{products.map((p) => (
+							<a href={`/prodotti/${p.slug}`} class="px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-primary/10 hover:text-primary transition-all">
+								{p.title}
+							</a>
+						))}
+					</div>
+				</div>
+			</div>
+			<a href="/#metodo" class="text-sm font-medium hover:text-primary transition-colors">Il Nostro Metodo</a>
+			<a href="/#contatti" class="text-sm font-medium hover:text-primary transition-colors">Contatti</a>
+		</div>
+		
+		<div class="hidden md:block">
+			<a href="/#preventivo">
+				<Button variant="default" size="sm" className="rounded-full cursor-pointer">
+					Richiedi Preventivo
+				</Button>
+			</a>
+		</div>
+
+		<!-- Mobile Menu Toggle Button -->
+		<button id="mobile-menu-btn" class="md:hidden relative z-50 p-2 text-foreground focus:outline-none cursor-pointer hover:text-primary transition-colors" aria-label="Toggle Menu">
+			<span id="menu-icon"><Menu class="h-6 w-6" /></span>
+			<span id="close-icon" class="hidden"><X class="h-6 w-6" /></span>
+		</button>
+	</div>
+
+	</div>
+</nav>
+
+<!-- Mobile Menu Drawer (Hidden by default) -->
+<div id="mobile-menu-drawer" class="fixed inset-0 z-[60] bg-background/98 backdrop-blur-2xl flex-col pt-24 px-6 md:hidden opacity-0 invisible transition-all duration-300 translate-x-full overflow-y-auto">
+	<button id="close-menu-btn" class="absolute top-6 right-6 p-2 text-foreground focus:outline-none cursor-pointer hover:text-primary transition-colors">
+		<X class="h-8 w-8" />
+	</button>
+	<div class="flex flex-col gap-6 w-full text-center mt-8">
+		
+		<div class="space-y-4 pt-4 border-t border-border">
+			<p class="text-xs uppercase tracking-widest text-muted-foreground font-bold">Prodotti</p>
+			<div class="flex flex-col gap-3">
+				{products.map((p) => (
+					<a href={`/prodotti/${p.slug}`} class="mobile-link text-lg font-heading hover:text-primary transition-colors">
+						{p.title}
+					</a>
+				))}
+			</div>
+		</div>
+
+		<a href="/#metodo" class="mobile-link text-xl font-heading font-medium hover:text-primary transition-colors pt-6 border-t border-border">Il Nostro Metodo</a>
+		<a href="/#contatti" class="mobile-link text-xl font-heading font-medium hover:text-primary transition-colors">Contatti</a>
+		
+		<div class="pt-6 border-t border-border mt-4 mb-12">
+			<a href="/#preventivo" class="mobile-link block w-full">
+				<Button variant="default" size="lg" className="w-full rounded-full cursor-pointer text-lg font-bold py-6">
+					Richiedi Preventivo
+				</Button>
+			</a>
+		</div>
+	</div>
+</div>
+
+<script>
+	function initMobileNav() {
+		const oldBtn = document.getElementById("mobile-menu-btn");
+		const closeBtn = document.getElementById("close-menu-btn");
+		const drawer = document.getElementById("mobile-menu-drawer");
+		let isOpen = false;
+
+		if (!oldBtn || !drawer) return;
+
+		// Clean up old listeners
+		const btn = oldBtn.cloneNode(true) as HTMLElement;
+		oldBtn.replaceWith(btn);
+		
+		const menuIcon = btn.querySelector("#menu-icon");
+		const closeIcon = btn.querySelector("#close-icon");
+		const links = document.querySelectorAll(".mobile-link");
+
+		function toggleMenu() {
+			isOpen = !isOpen;
+			if (isOpen) {
+				drawer!.classList.remove("invisible", "opacity-0", "translate-x-full");
+				drawer!.classList.add("flex");
+				menuIcon?.classList.add("hidden");
+				closeIcon?.classList.remove("hidden");
+				document.body.style.overflow = "hidden"; // Prevent scrolling
+			} else {
+				drawer!.classList.add("invisible", "opacity-0", "translate-x-full");
+				setTimeout(() => drawer!.classList.remove("flex"), 300);
+				menuIcon?.classList.remove("hidden");
+				closeIcon?.classList.add("hidden");
+				document.body.style.overflow = "auto";
+			}
+		}
+
+		btn.addEventListener("click", toggleMenu);
+		closeBtn?.addEventListener("click", () => {
+			if (isOpen) toggleMenu();
+		});
+
+		links.forEach(link => {
+			const newLink = link.cloneNode(true) as HTMLElement;
+			link.replaceWith(newLink);
+			newLink.addEventListener("click", () => {
+				if (isOpen) toggleMenu();
+			});
+		});
+	}
+
+	// Use astro:page-load which handles both initial load and transitions
+	document.addEventListener("astro:page-load", initMobileNav);
+</script>
+

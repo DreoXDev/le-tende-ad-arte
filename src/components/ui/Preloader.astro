@@ -1,0 +1,109 @@
+---
+---
+
+<div id="loader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-background pointer-events-auto">
+	<div class="relative flex flex-col items-center">
+		<!-- Subtle Progress Ring -->
+		<div class="absolute inset-0 -m-12">
+			<svg class="w-24 h-24 sm:w-32 sm:h-32 rotate-[-90deg]">
+				<circle
+					class="text-primary/10"
+					stroke-width="2"
+					stroke="currentColor"
+					fill="transparent"
+					r="48"
+					cx="64"
+					cy="64"
+				/>
+				<circle
+					id="progress-circle"
+					class="text-primary transition-all duration-300 ease-out"
+					stroke-width="2"
+					stroke-dasharray="301.59"
+					stroke-dashoffset="301.59"
+					stroke-linecap="round"
+					stroke="currentColor"
+					fill="transparent"
+					r="48"
+					cx="64"
+					cy="64"
+				/>
+			</svg>
+		</div>
+
+		<!-- Logo/Text -->
+		<div class="z-10 text-center">
+			<div id="loader-logo" class="flex flex-col items-center opacity-0 translate-y-4">
+				<img src="/images/logo.png" alt="Logo" class="h-16 w-16 mb-4 dark:invert" />
+				<div class="text-xl font-bold font-heading tracking-widest text-foreground uppercase">
+					Le Tende ad <span class="text-primary italic">Arte</span>
+				</div>
+                <div class="mt-2 h-0.5 w-0 bg-primary/20" id="loader-bar"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	import { gsap } from "gsap";
+
+	function initLoader() {
+		const loader = document.getElementById("loader");
+		const circle = document.getElementById("progress-circle") as unknown as SVGCircleElement;
+		const logo = document.getElementById("loader-logo");
+		const bar = document.getElementById("loader-bar");
+
+		if (!loader || !circle) return;
+
+		// Initial animation
+		const tl = gsap.timeline();
+
+		tl.to(logo, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+		  .to(bar, { width: "100%", duration: 1.5, ease: "power1.inOut" }, "-=0.4");
+
+		// Simulate loading progress
+		let progress = 0;
+		const interval = setInterval(() => {
+			progress += Math.random() * 30;
+			if (progress > 100) progress = 100;
+			
+			const offset = 301.59 - (progress / 100) * 301.59;
+			circle.style.strokeDashoffset = offset.toString();
+
+			if (progress === 100) {
+				clearInterval(interval);
+				
+				// Final out animation
+				setTimeout(() => {
+					const outTl = gsap.timeline();
+					outTl.to(logo, { opacity: 0, scale: 0.9, duration: 0.5, ease: "power2.in" })
+						 .to(loader, { 
+							opacity: 0, 
+							duration: 0.8, 
+							ease: "power2.out",
+							onComplete: () => {
+								loader.style.display = "none";
+								document.body.style.overflow = "auto";
+							}
+						 });
+				}, 400);
+			}
+		}, 200);
+	}
+
+	// Handle both initial load and Astro View Transitions
+	document.addEventListener("astro:page-load", () => {
+		const loader = document.getElementById("loader");
+		if (!loader) return;
+
+		// Always show loader on first visit in the session
+		if (!sessionStorage.getItem("visited")) {
+			document.body.style.overflow = "hidden";
+			initLoader();
+			sessionStorage.setItem("visited", "true");
+		} else {
+			loader.style.display = "none";
+			document.body.style.overflow = "auto";
+		}
+	});
+</script>

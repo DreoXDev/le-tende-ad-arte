@@ -1,0 +1,56 @@
+---
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowRight } from "lucide-astro";
+
+interface Props {
+	title: string;
+	description: string;
+	image?: string;
+	icon?: any;
+	tag?: string;
+	className?: string;
+	isOutline?: boolean;
+	slug?: string;
+}
+
+const { title, description, image, icon: Icon, tag, className, isOutline, slug } = Astro.props;
+---
+
+<Card className={`product-card group overflow-hidden transition-all hover:shadow-xl opacity-0 translate-y-10 ${isOutline ? 'border-dashed border-2 bg-transparent hover:bg-secondary/20' : 'border-none bg-secondary/50 shadow-sm'} ${className}`}>
+	{image && (
+		<a href={slug ? `/prodotti/${slug}` : "#preventivo"} class="block">
+			<div class="aspect-[4/3] overflow-hidden relative">
+				<img src={image} alt={title} class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110" />
+				<div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+			</div>
+		</a>
+	)}
+	
+	{!image && Icon && (
+		<div class="aspect-[4/3] flex items-center justify-center bg-primary/5">
+			<Icon class={`h-20 w-20 text-primary/30 ${title.includes('Automazioni') ? 'transition-transform duration-1000 group-hover:rotate-180' : ''}`} />
+		</div>
+	)}
+
+	<CardHeader>
+		{tag && (
+			<div class="flex items-center gap-2 text-primary mb-2">
+				{Icon && !image && <Icon class="h-4 w-4" />}
+				{Icon && image && <Icon class="h-4 w-4" />}
+				<span class="text-[10px] font-bold uppercase tracking-[0.2em]">{tag}</span>
+			</div>
+		)}
+		<CardTitle class="text-2xl font-bold font-heading">{title}</CardTitle>
+	</CardHeader>
+	<CardContent>
+		<p class="text-muted-foreground text-sm">{description}</p>
+	</CardContent>
+	<CardFooter>
+		<a href={slug ? `/prodotti/${slug}` : "#preventivo"} class="w-full sm:w-auto inline-block">
+			<Button variant={isOutline ? "outline" : "ghost"} className={isOutline ? "rounded-full px-8 w-full cursor-pointer h-12" : "py-2 px-0 hover:bg-transparent text-primary font-bold group-hover:gap-3 transition-all cursor-pointer min-h-[44px]"}>
+				{isOutline ? "Il Nostro Metodo" : "Scopri di più"} <ArrowRight class="ml-2 h-4 w-4" />
+			</Button>
+		</a>
+	</CardFooter>
+</Card>

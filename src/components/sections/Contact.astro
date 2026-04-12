@@ -1,0 +1,149 @@
+---
+import { Phone, Mail, MapPin, Clock } from "lucide-astro";
+---
+
+<section id="contatti" class="py-24 bg-background scroll-mt-20">
+	<div class="container mx-auto px-6">
+		<div id="contact-header" class="max-w-4xl mx-auto text-center mb-16 opacity-0 translate-y-10">
+			<h2 class="text-3xl md:text-5xl font-bold mb-6 font-heading">Vieni a <span class="text-primary italic">Trovarci.</span></h2>
+			<p class="text-muted-foreground text-lg">Siamo nel cuore di Abbiategrasso, pronti ad accoglierti nel nostro showroom per mostrarti dal vivo la qualità dei nostri tessuti.</p>
+		</div>
+
+		<div class="grid lg:grid-cols-2 gap-12 items-stretch">
+			<!-- Contact Information -->
+			<div class="space-y-8">
+				<div class="grid sm:grid-cols-2 gap-6">
+					<div class="contact-box p-6 rounded-2xl bg-secondary/30 border border-border hover:border-primary/30 transition-colors opacity-0 translate-x-10">
+						<div class="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4">
+							<Phone class="h-6 w-6" />
+						</div>
+						<h3 class="font-bold mb-2">Telefono</h3>
+						<p class="text-sm text-muted-foreground mb-1">Fisso: <a href="tel:+390294969152" class="hover:text-primary transition-colors">02 94969152</a></p>
+						<p class="text-sm text-muted-foreground">Mobile: <a href="tel:+393462138048" class="hover:text-primary transition-colors">346 2138048</a></p>
+					</div>
+
+					<div class="contact-box p-6 rounded-2xl bg-secondary/30 border border-border hover:border-primary/30 transition-colors opacity-0 translate-x-10">
+						<div class="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4">
+							<Mail class="h-6 w-6" />
+						</div>
+						<h3 class="font-bold mb-2">Email</h3>
+						<p class="text-sm text-muted-foreground">
+							<a href="mailto:letendeadarte@gmail.com" class="hover:text-primary transition-colors">letendeadarte@gmail.com</a>
+						</p>
+					</div>
+
+					<div class="contact-box p-6 rounded-2xl bg-secondary/30 border border-border hover:border-primary/30 transition-colors opacity-0 translate-x-10">
+						<div class="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4">
+							<MapPin class="h-6 w-6" />
+						</div>
+						<h3 class="font-bold mb-2">Indirizzo</h3>
+						<p class="text-sm text-muted-foreground">
+							Via XX Settembre, 12<br/>
+							20081 Abbiategrasso (MI)
+						</p>
+					</div>
+
+					<div class="contact-box p-6 rounded-2xl bg-secondary/30 border border-border hover:border-primary/30 transition-colors opacity-0 translate-x-10">
+						<div class="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4">
+							<Clock class="h-6 w-6" />
+						</div>
+						<h3 class="font-bold mb-2">Orari</h3>
+						<p class="text-sm text-muted-foreground">
+							Lun - Sab: 09:00 - 19:00<br/>
+							Domenica: Chiuso
+						</p>
+					</div>
+				</div>
+
+				<div id="contact-quote" class="p-8 rounded-3xl bg-primary/5 border border-primary/10 opacity-0 translate-y-10">
+					<p class="italic text-primary font-medium">
+						"Ogni cliente è unico, proprio come i nostri tessuti. Ti aspettiamo per una consulenza personalizzata senza impegno."
+					</p>
+					<p class="mt-4 font-bold text-sm uppercase tracking-widest">— Stefano Garegnani</p>
+				</div>
+			</div>
+
+			<!-- Map -->
+			<div id="contact-map" class="rounded-3xl overflow-hidden border border-border shadow-xl min-h-[400px] opacity-0 scale-95 translate-x-10">
+				<iframe 
+					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2801.5356177596923!2d8.9158593!3d45.3985377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786e5646363c31f%3A0xb46b5f7f88539976!2sCorso%20XX%20Settembre%2C%2012%2C%2020081%20Abbiategrasso%20MI!5e0!3m2!1sit!2sit!4v1776003791303!5m2!1sit!2sit" 
+					width="100%" 
+					height="100%" 
+					style="border:0;" 
+					allowfullscreen="" 
+					loading="lazy" 
+					referrerpolicy="no-referrer-when-downgrade"
+					class="grayscale contrast-125 dark:invert dark:hue-rotate-180"
+				></iframe>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+	gsap.registerPlugin(ScrollTrigger);
+
+	document.addEventListener("astro:page-load", () => {
+		if (!document.getElementById("contatti")) return;
+
+		// Header
+		gsap.to("#contact-header", {
+			scrollTrigger: {
+				trigger: "#contatti",
+				start: "top 80%",
+				toggleActions: "play none none none",
+			},
+			opacity: 1,
+			y: 0,
+			duration: 1,
+			ease: "power3.out",
+		});
+
+		// Contact boxes (staggered from right)
+		const boxes = document.querySelectorAll(".contact-box");
+		if (boxes.length > 0) {
+			gsap.to(".contact-box", {
+				scrollTrigger: {
+					trigger: ".contact-box",
+					start: "top 85%",
+					toggleActions: "play none none none",
+				},
+				opacity: 1,
+				x: 0,
+				stagger: 0.1,
+				duration: 1,
+				ease: "power3.out",
+			});
+		}
+
+		// Quote
+		gsap.to("#contact-quote", {
+			scrollTrigger: {
+				trigger: "#contact-quote",
+				start: "top 90%",
+				toggleActions: "play none none none",
+			},
+			opacity: 1,
+			y: 0,
+			duration: 1.2,
+			delay: 0.4,
+			ease: "power3.out",
+		});
+
+		// Map
+		gsap.to("#contact-map", {
+			scrollTrigger: {
+				trigger: "#contact-map",
+				start: "top 80%",
+				toggleActions: "play none none none",
+			},
+			opacity: 1,
+			x: 0,
+			scale: 1,
+			duration: 1.5,
+			ease: "power3.out",
+		});
+	});
+</script>

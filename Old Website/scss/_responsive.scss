@@ -1,0 +1,78 @@
+/* ---------------------- */
+/* RESPONSIVE DESIGN */
+/* ---------------------- */
+
+/* TABLET */
+@media (max-width: 768px) {
+
+    .navbar {
+        height: 80px;
+        padding: 0 25px;
+    }
+
+    .nav-menu {
+        gap: 15px;
+    }
+
+    .titolo-brand {
+        font-size: 3rem;
+    }
+}
+
+/* SMARTPHONE */
+@media (max-width: 480px) {
+
+    .navbar {
+        height: 65px;
+        padding: 0 15px;
+    }
+
+    .nav-logo {
+        height: 40px;
+    }
+
+    /* hamburger ON (sostituisce .nav-toggle) */
+    .hamburger {
+        display: flex;
+    }
+
+    /* menu mobile */
+    .nav-menu {
+        position: absolute;
+        top: 65px;
+        right: 0;
+        background: white;
+        width: 100%;
+        flex-direction: column;
+        display: none;
+        padding: 20px 0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* apertura menu */
+    .nav-menu.open {
+        display: flex;
+    }
+
+    .nav-menu li {
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .hero {
+        padding-top: 65px;
+    }
+
+    .titolo-brand {
+        font-size: 2.4rem;
+    }
+
+    .sottotitolo-brand {
+        font-size: 1rem;
+    }
+
+    .servizi-grid,
+    .galleria-grid {
+        grid-template-columns: 1fr;
+    }
+}

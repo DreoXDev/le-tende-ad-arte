@@ -1,0 +1,115 @@
+---
+import { Star, Quote } from "lucide-astro";
+
+const reviews = [
+	{
+		name: "Lucia M.",
+		text: "Il mio salone ha acquistato bellezza grazie alla consulenza esperta e alla maestria nel montaggio. Un lavoro eccellente sotto ogni punto di vista.",
+		stars: 5,
+		date: "Google Review"
+	},
+	{
+		name: "Rosa A. G.",
+		text: "Ampia scelta di tessuti per ogni gusto e arredo. La qualità dei materiali è percepibile al tatto. Molto soddisfatta!",
+		stars: 5,
+		date: "Google Review"
+	},
+	{
+		name: "Francesca E.",
+		text: "Stefano è un professionista molto disponibile e preparato. Ha saputo consigliarmi la soluzione migliore per le mie zanzariere.",
+		stars: 5,
+		date: "Google Review"
+	}
+];
+---
+
+<section id="recensioni" class="py-24 bg-secondary/30 relative overflow-hidden">
+	<div class="container mx-auto px-6">
+		<div id="reviews-header" class="text-center max-w-3xl mx-auto mb-16 opacity-0 translate-y-10">
+			<div class="inline-flex items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary mb-6">
+				Testimonianze
+			</div>
+			<h2 class="text-3xl md:text-5xl font-bold mb-6 font-heading tracking-tight">Cosa dicono di <span class="text-primary italic">noi.</span></h2>
+			<p class="text-muted-foreground text-lg italic">
+				"La soddisfazione dei nostri clienti è il riconoscimento più grande per il nostro lavoro artigianale."
+			</p>
+		</div>
+
+		<div class="grid md:grid-cols-3 gap-8">
+			{reviews.map((review) => (
+				<div class="review-card bg-card p-8 rounded-2xl shadow-sm border border-border relative group hover:shadow-md transition-all opacity-0 translate-y-10">
+					<Quote class="absolute top-6 right-6 h-10 w-10 text-primary/10 group-hover:text-primary/20 transition-colors" />
+					<div class="flex gap-1 mb-4">
+						{[...Array(review.stars)].map((_) => (
+							<Star class="h-4 w-4 text-primary fill-current" />
+						))}
+					</div>
+					<p class="text-muted-foreground mb-6 line-clamp-4 italic">"{review.text}"</p>
+					<div class="flex items-center justify-between mt-auto pt-4 border-t border-border/50">
+						<span class="font-bold text-foreground italic">{review.name}</span>
+						<span class="text-[10px] uppercase tracking-widest text-primary/60 font-medium">{review.date}</span>
+					</div>
+				</div>
+			))}
+		</div>
+		
+		<div id="reviews-link" class="mt-16 text-center opacity-0">
+			<a href="https://www.google.com/search?q=Le+Tende+ad+Arte+Recensioni" target="_blank" class="inline-flex items-center gap-2 text-primary font-bold hover:underline">
+				Leggi tutte le recensioni su Google <Star class="h-4 w-4" />
+			</a>
+		</div>
+	</div>
+</section>
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+	gsap.registerPlugin(ScrollTrigger);
+
+	document.addEventListener("astro:page-load", () => {
+		if (!document.getElementById("recensioni")) return;
+
+		// Header animation
+		gsap.to("#reviews-header", {
+			scrollTrigger: {
+				trigger: "#recensioni",
+				start: "top 80%",
+				toggleActions: "play none none none",
+			},
+			opacity: 1,
+			y: 0,
+			duration: 1,
+			ease: "power3.out",
+		});
+
+		// Cards animation
+		const cards = document.querySelectorAll(".review-card");
+		if (cards.length > 0) {
+			gsap.to(".review-card", {
+				scrollTrigger: {
+					trigger: ".review-card",
+					start: "top 85%",
+					toggleActions: "play none none none",
+				},
+				opacity: 1,
+				y: 0,
+				stagger: 0.15,
+				duration: 1,
+				ease: "power3.out",
+			});
+		}
+
+		// Link animation
+		gsap.to("#reviews-link", {
+			scrollTrigger: {
+				trigger: "#reviews-link",
+				start: "top 90%",
+				toggleActions: "play none none none",
+			},
+			opacity: 1,
+			duration: 1,
+			delay: 0.5,
+			ease: "power2.out",
+		});
+	});
+</script>

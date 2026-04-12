@@ -1,0 +1,140 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Navbar from "@/components/layout/Navbar.astro";
+import Footer from "@/components/layout/Footer.astro";
+import Contact from "@/components/sections/Contact.astro";
+import Lightbox from "@/components/ui/Lightbox.astro";
+import { Button } from "@/components/ui/button";
+import { products } from "@/data/products";
+import { ArrowRight, CheckCircle2 } from "lucide-astro";
+
+export async function getStaticPaths() {
+	return products.map((product) => ({
+		params: { slug: product.slug },
+		props: { product },
+	}));
+}
+
+const { product } = Astro.props;
+---
+
+<Layout title={`${product.title} | Le Tende ad Arte`}>
+	<Navbar />
+	
+	<main>
+		<Lightbox />
+		<!-- Hero Section -->
+		<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+			<div class="absolute inset-0 z-0">
+				<img src={product.heroImage} alt={product.title} class="w-full h-full object-cover" />
+				<div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
+				<div class="absolute inset-0 bg-gradient-to-b from-transparent to-background"></div>
+			</div>
+			
+			<div class="container mx-auto relative z-10 px-6 pt-20 text-center">
+				<h1 id="product-title" class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold font-heading text-white uppercase tracking-tighter mb-4 opacity-0 leading-[1.1]">
+					{product.title}
+				</h1>
+				<p id="product-subtitle" class="text-lg sm:text-xl md:text-2xl text-white/80 font-medium max-w-2xl mx-auto opacity-0 px-4">
+					{product.subtitle}
+				</p>
+			</div>
+		</section>
+
+		<!-- Content Section -->
+		<section class="py-24 bg-background relative z-10">
+			<div class="container mx-auto px-6">
+				<div class="grid lg:grid-cols-2 gap-16 items-start">
+					<div id="product-content" class="opacity-0">
+						<h2 class="text-3xl md:text-4xl font-bold mb-8 font-heading">L'Artigianalità del <span class="text-primary italic">Su Misura.</span></h2>
+						<p class="text-lg text-muted-foreground leading-relaxed mb-10">
+							{product.description}
+						</p>
+						
+						<div class="grid sm:grid-cols-2 gap-6 mb-12">
+							{product.types.map((type) => (
+								<div class="flex items-center gap-3 p-4 rounded-xl bg-secondary/30 border border-border">
+									<CheckCircle2 class="h-5 w-5 text-primary shrink-0" />
+									<span class="font-medium">{type}</span>
+								</div>
+							))}
+						</div>
+						
+						<a href="#preventivo">
+							<Button size="lg" className="rounded-full px-10 h-14 font-bold shadow-lg hover:shadow-primary/20 transition-all">
+								Richiedi un preventivo <ArrowRight class="ml-2 h-5 w-5" />
+							</Button>
+						</a>
+					</div>
+					
+					<div id="product-main-img" class="relative rounded-3xl overflow-hidden shadow-2xl opacity-0">
+						<img src={`${product.galleryPath}foto1.jpg`} alt={product.title} class="w-full h-auto object-cover aspect-[4/5]" />
+						<div class="absolute bottom-6 left-6 right-6 p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl">
+							<p class="text-white font-medium text-sm italic">"Precisione e cura dei materiali per ogni singolo progetto."</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Gallery Section -->
+		<section class="py-24 bg-secondary/20">
+			<div class="container mx-auto px-6">
+				<div class="text-center mb-16">
+					<h2 class="text-3xl md:text-5xl font-bold mb-4 font-heading">Galleria <span class="text-primary italic">Realizzazioni.</span></h2>
+					<p class="text-muted-foreground">Alcuni dei nostri lavori più recenti eseguiti ad arte.</p>
+				</div>
+				
+				<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+					{Array.from({ length: product.imageCount - 1 }).map((_, i) => (
+						<div class="gallery-item group relative aspect-square rounded-2xl overflow-hidden cursor-zoom-in opacity-0 translate-y-10">
+							<img 
+								src={`${product.galleryPath}foto${i + 2}.jpg`} 
+								alt={`${product.title} realization ${i + 2}`} 
+								class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+							/>
+							<div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors"></div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<Contact />
+	</main>
+	
+	<Footer />
+</Layout>
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+	gsap.registerPlugin(ScrollTrigger);
+
+	document.addEventListener("astro:page-load", () => {
+		// Page load animations - handle potentially missing elements on other pages
+		if (document.getElementById("product-title")) {
+			gsap.to("#product-title", { opacity: 1, y: 0, duration: 1, ease: "power4.out", delay: 0.2 });
+			gsap.to("#product-subtitle", { opacity: 1, y: 0, duration: 1, ease: "power4.out", delay: 0.4 });
+			gsap.to("#product-content", { opacity: 1, x: 0, duration: 1, ease: "power2.out", delay: 0.6 });
+			gsap.to("#product-main-img", { opacity: 1, x: 0, duration: 1, ease: "power2.out", delay: 0.8 });
+		}
+
+		// Gallery animations
+		const galleryItems = document.querySelectorAll(".gallery-item");
+		if (galleryItems.length > 0) {
+			gsap.to(".gallery-item", {
+				scrollTrigger: {
+					trigger: ".gallery-item",
+					start: "top 90%",
+					toggleActions: "play none none none",
+				},
+				opacity: 1,
+				y: 0,
+				stagger: 0.1,
+				duration: 0.8,
+				ease: "power2.out"
+			});
+		}
+	});
+</script>
