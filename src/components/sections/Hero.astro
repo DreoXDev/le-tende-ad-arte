@@ -1,6 +1,7 @@
 ---
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Instagram, Facebook, MessageCircle } from "lucide-astro";
+import { asset } from "@/lib/asset";
 ---
 
 <section class="relative flex min-h-screen items-center justify-center overflow-hidden bg-background">
@@ -8,7 +9,7 @@ import { ArrowRight, Instagram, Facebook, MessageCircle } from "lucide-astro";
 	<div class="absolute inset-0 z-0 overflow-hidden">
 		<img 
 			id="hero-bg"
-			src="/images/hero_bg.jpg" 
+			src={asset("/images/hero_bg.jpg")} 
 			alt="Tende da sole moderne di design - Le Tende ad Arte Abbiategrasso" 
 			class="h-[120%] w-full object-cover brightness-[0.7] -translate-y-[10%]"
 		/>

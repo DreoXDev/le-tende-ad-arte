@@ -16,8 +16,10 @@ const {
 	image = "/images/hero_bg.jpg"
 } = Astro.props;
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://letendeadarte.it/");
 const siteTitle = title.includes("Le Tende ad Arte") ? title : `${title} | Le Tende ad Arte`;
+const ogImage = new URL(`${base}${image}`, Astro.site || "https://letendeadarte.it/");
 ---
 
 <!doctype html>
@@ -40,14 +42,14 @@ const siteTitle = title.includes("Le Tende ad Arte") ? title : `${title} | Le Te
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:title" content={siteTitle} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content={new URL(image, canonicalURL)} />
+		<meta property="og:image" content={ogImage} />
 
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content={canonicalURL} />
 		<meta property="twitter:title" content={siteTitle} />
 		<meta property="twitter:description" content={description} />
-		<meta property="twitter:image" content={new URL(image, canonicalURL)} />
+		<meta property="twitter:image" content={ogImage} />
 
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

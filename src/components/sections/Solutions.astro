@@ -1,12 +1,13 @@
 ---
 import ProductCard from "@/components/ui/ProductCard.astro";
 import { Sun, Wind, Box, Settings } from "lucide-astro";
+import { asset } from "@/lib/asset";
 
 const products = [
 	{
 		title: "Tende da Interno",
 		description: "Realizzate su misura con tessuti di alta qualità, disponibili in una vasta gamma di colori, trame e stili: a pacchetto, arricciate, a pannello.",
-		image: "/images/interior_blinds_real.jpg",
+		image: asset("/images/interior_blinds_real.jpg"),
 		icon: Sun,
 		tag: "Eleganza",
 		slug: "tende-da-interno"
@@ -14,7 +15,7 @@ const products = [
 	{
 		title: "Scorritenda",
 		description: "Bastoni e binari dal design classico o moderno per scorrimenti fluidi e installazioni impeccabili su ogni finestra.",
-		image: "/images/scorritenda.png",
+		image: asset("/images/scorritenda.png"),
 		icon: Settings,
 		tag: "Precisione",
 		slug: "scorritenda"
@@ -22,7 +23,7 @@ const products = [
 	{
 		title: "Tende Tecniche",
 		description: "Soluzioni filtranti o oscuranti, rulli e pacchetti tecnici ideali per valorizzare luce e spazi in uffici o living moderni.",
-		image: "/images/technical_blinds_real.jpg",
+		image: asset("/images/technical_blinds_real.jpg"),
 		icon: Sun,
 		tag: "Funzionalità",
 		slug: "tende-tecniche"
@@ -30,7 +31,7 @@ const products = [
 	{
 		title: "Tessuti e Divani",
 		description: "Rivestimenti artigianali per divani e poltrone. Rinnova i tuoi arredi con tessuti tecnici o decorativi di pregio.",
-		image: "/images/sofa_fabrics.jpg",
+		image: asset("/images/sofa_fabrics.jpg"),
 		icon: Box,
 		tag: "Comfort",
 		slug: "tessuti-per-divani"
@@ -38,7 +39,7 @@ const products = [
 	{
 		title: "Zanzariere",
 		description: "Sistemi a scorrimento fluido, magnetico o a frizione. Protezione totale senza rinunciare alla visibilità.",
-		image: "/images/mosquito_net_real.jpg",
+		image: asset("/images/mosquito_net_real.jpg"),
 		icon: Wind,
 		tag: "Protezione",
 		slug: "zanzariere"

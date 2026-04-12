@@ -7,6 +7,7 @@ import Lightbox from "@/components/ui/Lightbox.astro";
 import { Button } from "@/components/ui/button";
 import { products } from "@/data/products";
 import { ArrowRight, CheckCircle2 } from "lucide-astro";
+import { asset } from "@/lib/asset";
 
 export async function getStaticPaths() {
 	return products.map((product) => ({
@@ -30,7 +31,7 @@ const { product } = Astro.props;
 		<!-- Hero Section -->
 		<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
 			<div class="absolute inset-0 z-0">
-				<img src={product.heroImage} alt={product.title} class="w-full h-full object-cover" />
+				<img src={asset(product.heroImage)} alt={product.title} class="w-full h-full object-cover" />
 				<div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
 				<div class="absolute inset-0 bg-gradient-to-b from-transparent to-background"></div>
 			</div>
@@ -72,7 +73,7 @@ const { product } = Astro.props;
 					</div>
 					
 					<div id="product-main-img" class="relative rounded-3xl overflow-hidden shadow-2xl opacity-0">
-						<img src={`${product.galleryPath}foto1.jpg`} alt={product.title} class="w-full h-auto object-cover aspect-[4/5]" />
+						<img src={asset(`${product.galleryPath}foto1.jpg`)} alt={product.title} class="w-full h-auto object-cover aspect-[4/5]" />
 						<div class="absolute bottom-6 left-6 right-6 p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl">
 							<p class="text-white font-medium text-sm italic">"Precisione e cura dei materiali per ogni singolo progetto."</p>
 						</div>
@@ -93,7 +94,7 @@ const { product } = Astro.props;
 					{Array.from({ length: product.imageCount - 1 }).map((_, i) => (
 						<div class="gallery-item group relative aspect-square rounded-2xl overflow-hidden cursor-zoom-in opacity-0 translate-y-10">
 							<img 
-								src={`${product.galleryPath}foto${i + 2}.jpg`} 
+								src={asset(`${product.galleryPath}foto${i + 2}.jpg`)} 
 								alt={`${product.title} realization ${i + 2}`} 
 								class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
 							/>

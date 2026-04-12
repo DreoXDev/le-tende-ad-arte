@@ -1,5 +1,6 @@
 ---
 import { ShieldCheck, Heart } from "lucide-astro";
+import { asset } from "@/lib/asset";
 ---
 
 <section id="metodo" class="py-24 bg-background overflow-hidden scroll-mt-20">
@@ -8,7 +9,7 @@ import { ShieldCheck, Heart } from "lucide-astro";
 			<div id="about-image" class="lg:w-1/2 relative opacity-0 -translate-x-20">
 				<div class="absolute -top-10 -left-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl"></div>
 				<div class="relative rounded-2xl overflow-hidden shadow-2xl">
-					<img src="/images/interior_blinds.png" alt="Showroom Le Tende ad Arte - Tende da interno e artigianato ad Abbiategrasso" class="w-full h-full object-cover aspect-[4/5] hover:scale-105 transition-transform duration-700" />
+					<img src={asset("/images/interior_blinds.png")} alt="Showroom Le Tende ad Arte - Tende da interno e artigianato ad Abbiategrasso" class="w-full h-full object-cover aspect-[4/5] hover:scale-105 transition-transform duration-700" />
 				</div>
 				<div id="about-badge" class="absolute -bottom-6 -right-6 bg-white dark:bg-card p-6 rounded-xl shadow-xl border border-border max-w-[200px] opacity-0 scale-50">
 					<div class="text-4xl font-bold text-primary mb-1 italic">50+</div>

@@ -1,6 +1,7 @@
 ---
 import { Instagram, Facebook, MessageCircle } from "lucide-astro";
 import { products } from "@/data/products";
+import { asset } from "@/lib/asset";
 ---
 <footer class="border-t py-20 bg-background">
 	<div class="container mx-auto px-6">
@@ -8,7 +9,7 @@ import { products } from "@/data/products";
 			<!-- Brand Info -->
 			<div class="lg:col-span-1">
 				<div class="flex items-center gap-4 mb-8">
-					<img src="/images/logo.png" alt="Le Tende ad Arte" class="h-12 w-12 object-contain dark:invert opacity-80" />
+					<img src={asset("/images/logo.png")} alt="Le Tende ad Arte" class="h-12 w-12 object-contain dark:invert opacity-80" />
 					<div class="text-2xl font-bold font-heading tracking-tighter uppercase leading-none mt-2">
 						LE TENDE AD <br/><span class="text-primary italic">ARTE</span>
 					</div>
