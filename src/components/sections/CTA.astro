@@ -28,10 +28,13 @@ import { Button } from "@/components/ui/button";
 			</div>
 
 			<div id="cta-form" class="bg-white dark:bg-card p-8 rounded-3xl shadow-2xl text-foreground opacity-0 translate-x-10 scale-95">
-				<form action="https://formsubmit.co/5badc1f73f619b1785aac68c10b5f6de" method="POST" class="space-y-6">
-					<input type="hidden" name="_subject" value="Nuova richiesta preventivo dal sito">
+				<!-- Il modulo inoltrerà in automatico i dati alla mail specificata in action -->
+				<form action="https://formsubmit.co/letendeadarte@gmail.com" method="POST" class="space-y-6">
+					<input type="hidden" name="_subject" value="Nuova richiesta preventivo dal sito Web Le Tende ad Arte">
 					<input type="hidden" name="_captcha" value="false">
-					<input type="hidden" name="_template" value="table">
+					<input type="hidden" name="_template" value="box">
+					<input type="hidden" name="_autoresponse" value="Grazie per la tua richiesta! Abbiamo ricevuto il tuo messaggio e ti contatteremo il prima possibile per studiare insieme la soluzione migliore. — Stefano, Le Tende ad Arte">
+					<input type="hidden" name="_next" value="https://letendeadarte.it/">
 					
 					<div class="grid sm:grid-cols-2 gap-4">
 						<div class="space-y-2">

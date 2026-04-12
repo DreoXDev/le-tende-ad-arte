@@ -18,7 +18,11 @@ export async function getStaticPaths() {
 const { product } = Astro.props;
 ---
 
-<Layout title={`${product.title} | Le Tende ad Arte`}>
+<Layout 
+	title={product.title} 
+	description={product.description} 
+	image={product.heroImage}
+>
 	<Navbar />
 	
 	<main>
