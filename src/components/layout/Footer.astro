@@ -1,7 +1,7 @@
 ---
 import { Instagram, Facebook, MessageCircle } from "lucide-astro";
 import { products } from "@/data/products";
-import { asset } from "@/lib/asset";
+import { asset, link } from "@/lib/asset";
 ---
 <footer class="border-t py-20 bg-background">
 	<div class="container mx-auto px-6">
@@ -29,10 +29,10 @@ import { asset } from "@/lib/asset";
 			<div>
 				<h4 class="font-bold mb-6 uppercase text-sm tracking-[0.2em] text-foreground">Link Rapidi</h4>
 				<ul class="space-y-4 text-sm text-muted-foreground font-medium">
-					<li><a href="/#home" class="hover:text-primary transition-colors">Home</a></li>
-					<li><a href="/#metodo" class="hover:text-primary transition-colors">Il Nostro Metodo</a></li>
-					<li><a href="/#recensioni" class="hover:text-primary transition-colors">Recensioni</a></li>
-					<li><a href="/#preventivo" class="hover:text-primary transition-colors">Richiedi Preventivo</a></li>
+					<li><a href={link("/#home")} class="hover:text-primary transition-colors">Home</a></li>
+					<li><a href={link("/#metodo")} class="hover:text-primary transition-colors">Il Nostro Metodo</a></li>
+					<li><a href={link("/#recensioni")} class="hover:text-primary transition-colors">Recensioni</a></li>
+					<li><a href={link("/#preventivo")} class="hover:text-primary transition-colors">Richiedi Preventivo</a></li>
 				</ul>
 			</div>
 
@@ -42,7 +42,7 @@ import { asset } from "@/lib/asset";
 				<ul class="space-y-4 text-sm text-muted-foreground font-medium">
 					{products.map((p) => (
 						<li>
-							<a href={`/prodotti/${p.slug}`} class="hover:text-primary transition-colors">
+							<a href={link(`/prodotti/${p.slug}`)} class="hover:text-primary transition-colors">
 								{p.title}
 							</a>
 						</li>
@@ -65,9 +65,9 @@ import { asset } from "@/lib/asset";
 		<div class="border-t pt-10 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
 			<p class="text-muted-foreground text-sm font-medium">© 2026 Le Tende ad Arte - P.IVA 11522420964.</p>
 			<div class="flex gap-4 text-sm font-medium">
-				<a href="/privacy" class="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a>
+				<a href={link("/privacy")} class="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a>
 				<span class="text-muted-foreground/30">|</span>
-				<a href="/privacy" class="text-muted-foreground hover:text-primary transition-colors">Cookie Policy</a>
+				<a href={link("/privacy")} class="text-muted-foreground hover:text-primary transition-colors">Cookie Policy</a>
 			</div>
 		</div>
 	</div>

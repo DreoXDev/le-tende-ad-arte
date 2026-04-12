@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar.astro";
 import Footer from "@/components/layout/Footer.astro";
 import { Button } from "@/components/ui/button";
 import { Home, ArrowLeft } from "lucide-astro";
+import { link } from "@/lib/asset";
 ---
 
 <Layout title="Pagina Non Trovata | Le Tende ad Arte" description="Spiacenti, la pagina che stai cercando non esiste. Torna alla home per esplorare le nostre tende e tessuti su misura.">
@@ -26,7 +27,7 @@ import { Home, ArrowLeft } from "lucide-astro";
 			</div>
 
 			<div id="error-actions" class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 opacity-0">
-				<a href="/">
+				<a href={link("/")}>
 					<Button size="lg" className="rounded-full px-8 font-bold shadow-lg">
 						<Home class="mr-2 h-5 w-5" /> Torna alla Home
 					</Button>

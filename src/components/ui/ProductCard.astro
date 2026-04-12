@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight } from "lucide-astro";
+import { link } from "@/lib/asset";
 
 interface Props {
 	title: string;
@@ -19,7 +20,7 @@ const { title, description, image, icon: Icon, tag, className: propClassName, is
 
 <Card className={`product-card group overflow-hidden transition-all hover:shadow-xl opacity-0 translate-y-10 ${isOutline ? 'border-dashed border-2 bg-transparent hover:bg-secondary/20' : 'border-none bg-secondary/50 shadow-sm'} ${propClassName || ''}`}>
 	{image && (
-		<a href={slug ? `/prodotti/${slug}` : "#preventivo"} class="block">
+		<a href={slug ? link(`/prodotti/${slug}`) : "#preventivo"} class="block">
 			<div class="aspect-[4/3] overflow-hidden relative">
 				<img src={image} alt={title} class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110" />
 				<div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
@@ -47,7 +48,7 @@ const { title, description, image, icon: Icon, tag, className: propClassName, is
 		<p class="text-muted-foreground text-sm">{description}</p>
 	</CardContent>
 	<CardFooter>
-		<a href={slug ? `/prodotti/${slug}` : "#preventivo"} class="w-full sm:w-auto inline-block">
+		<a href={slug ? link(`/prodotti/${slug}`) : "#preventivo"} class="w-full sm:w-auto inline-block">
 			<Button variant={isOutline ? "outline" : "ghost"} className={isOutline ? "rounded-full px-8 w-full cursor-pointer h-12" : "py-2 px-0 hover:bg-transparent text-primary font-bold group-hover:gap-3 transition-all cursor-pointer min-h-[44px]"}>
 				{isOutline ? "Il Nostro Metodo" : "Scopri di più"} <ArrowRight class="ml-2 h-4 w-4" />
 			</Button>
