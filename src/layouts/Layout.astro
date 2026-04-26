@@ -5,141 +5,224 @@ import Preloader from "@/components/ui/Preloader.astro";
 import CookieBanner from "@/components/ui/CookieBanner.astro";
 
 interface Props {
-	title: string;
-	description?: string;
-	image?: string;
+  title: string;
+  description?: string;
+  image?: string;
 }
 
-const { 
-	title, 
-	description = "Tende da interno, tessuti d'arredo e schermature tecniche realizzate artigianalmente. Da oltre 50 anni Le Tende ad Arte Abbiategrasso veste la tua casa.",
-	image = "/images/hero_bg.jpg"
+const {
+  title,
+  description = "Tende da interno, tessuti d'arredo e schermature tecniche realizzate artigianalmente. Da oltre 50 anni Le Tende ad Arte Abbiategrasso veste la tua casa.",
+  image = "/images/hero_bg.jpg",
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://letendeadarte.it/");
-const siteTitle = title.includes("Le Tende ad Arte") ? title : `${title} | Le Tende ad Arte`;
-const ogImage = new URL(`${base}${image}`, Astro.site || "https://letendeadarte.it/");
+const canonicalURL = new URL(
+  Astro.url.pathname,
+  Astro.site || "https://letendeadarte.it/",
+);
+const siteTitle = title.includes("Le Tende ad Arte")
+  ? title
+  : `${title} | Le Tende ad Arte`;
+const ogImage = new URL(
+  `${base}${image}`,
+  Astro.site || "https://letendeadarte.it/",
+);
 ---
 
 <!doctype html>
 <html lang="it">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-		<link rel="manifest" href="/manifest.webmanifest" />
-		<meta name="generator" content={Astro.generator} />
-		
-		<title>{siteTitle}</title>
-		<meta name="description" content={description} />
-		<link rel="canonical" href={canonicalURL} />
-		<ClientRouter />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href={`${base}/favicon.ico`} />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href={`${base}/favicon-32.png`}
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href={`${base}/apple-touch-icon.png`}
+    />
+    <link rel="manifest" href={`${base}/manifest.webmanifest`} />
+    <meta name="generator" content={Astro.generator} />
 
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={canonicalURL} />
-		<meta property="og:title" content={siteTitle} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content={ogImage} />
+    <title>{siteTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <ClientRouter />
 
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={canonicalURL} />
-		<meta property="twitter:title" content={siteTitle} />
-		<meta property="twitter:description" content={description} />
-		<meta property="twitter:image" content={ogImage} />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
 
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-		
-		<!-- Google Consent Mode v2 & Analytics -->
-		<script is:inline>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			
-			// Default consent setup based on GDPR (Tutto bloccato di default)
-			gtag('consent', 'default', {
-				'ad_storage': 'denied',
-				'ad_user_data': 'denied',
-				'ad_personalization': 'denied',
-				'analytics_storage': 'denied'
-			});
-		</script>
-		
-		<!-- Sostituire G-XXXXXXXXXX con il vero ID di tracciamento Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-		<script is:inline>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'G-XXXXXXXXXX');
-		</script>
-		
-		<!-- Structured Data -->
-		<script type="application/ld+json" is:inline>
-		{
-		  "@context": "https://schema.org",
-		  "@type": "LocalBusiness",
-		  "name": "Le Tende ad Arte",
-		  "image": "https://letendeadarte.it/images/logo.png",
-		  "@id": "https://letendeadarte.it",
-		  "url": "https://letendeadarte.it",
-		  "telephone": "+390294969152",
-		  "address": {
-			"@type": "PostalAddress",
-			"streetAddress": "Via XX Settembre, 12",
-			"addressLocality": "Abbiategrasso",
-			"postalCode": "20081",
-			"addressRegion": "MI",
-			"addressCountry": "IT"
-		  },
-		  "geo": {
-			"@type": "GeoCoordinates",
-			"latitude": 45.39835,
-			"longitude": 8.91965
-		  },
-		  "openingHoursSpecification": {
-			"@type": "OpeningHoursSpecification",
-			"dayOfWeek": [
-			  "Monday",
-			  "Tuesday",
-			  "Wednesday",
-			  "Thursday",
-			  "Friday",
-			  "Saturday"
-			],
-			"opens": "09:00",
-			"closes": "19:00"
-		  }
-		}
-		</script>
-	</head>
-	<body class="min-h-screen bg-background font-sans antialiased overflow-x-hidden">
-		<Preloader />
-		<slot />
-		<CookieBanner />
-		
-		<script>
-			import { gsap } from "gsap";
-			import { ScrollTrigger } from "gsap/ScrollTrigger";
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={siteTitle} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
 
-			gsap.registerPlugin(ScrollTrigger);
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
 
-			// Global animations or shared logic can go here
-		</script>
-	</body>
+    <!-- Google Consent Mode v2 & Analytics -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      // Default consent setup based on GDPR (Tutto bloccato di default)
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+      });
+    </script>
+
+    <!-- Google Analytics 4 - ID configurato tramite env variable PUBLIC_GA_ID -->
+    <!-- In locale: crea un file .env.local con PUBLIC_GA_ID=G-XXXXXXXX -->
+    <!-- Su GitHub Pages: aggiungi il Secret GA_MEASUREMENT_ID nelle impostazioni della repo -->
+    <script
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA_ID ?? ""}`}
+    ></script>
+    <script is:inline define:vars={{ gaId: import.meta.env.PUBLIC_GA_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      if (gaId) gtag("config", gaId);
+    </script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Le Tende ad Arte",
+        "image": "https://letendeadarte.it/images/logo.png",
+        "@id": "https://letendeadarte.it",
+        "url": "https://letendeadarte.it",
+        "telephone": "+390294969152",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Via XX Settembre, 12",
+          "addressLocality": "Abbiategrasso",
+          "postalCode": "20081",
+          "addressRegion": "MI",
+          "addressCountry": "IT"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 45.39835,
+          "longitude": 8.91965
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "09:00",
+          "closes": "19:00"
+        }
+      }
+    </script>
+  </head>
+  <body
+    class="min-h-screen bg-background font-sans antialiased overflow-x-hidden"
+  >
+    <Preloader />
+    <slot />
+    <CookieBanner />
+
+    <script>
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Global animations or shared logic can go here
+    </script>
+  </body>
 </html>
 
 <style is:global>
-	:root {
-		--font-sans: 'Inter', sans-serif;
-		--font-heading: 'Playfair Display', serif;
-	}
+  :root {
+    --font-sans: "Inter", sans-serif;
+    --font-heading: "Lobster", cursive;
+  }
 
-	h1, h2, h3, h4, h5, h6 {
-		font-family: var(--font-heading);
-	}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+
+  /* ── Nessun elemento di testo selezionabile (eccetto link e bottoni) ── */
+  body,
+  p,
+  span,
+  h1, h2, h3, h4, h5, h6,
+  li,
+  label,
+  div,
+  section,
+  article,
+  header,
+  footer,
+  nav {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Link e bottoni rimangono selezionabili/cliccabili normalmente */
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"] {
+    user-select: auto;
+    -webkit-user-select: auto;
+  }
+
+  /* ── Transizioni di pagina fluide (Astro ClientRouter) ── */
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fade-out {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-8px); }
+  }
+
+  ::view-transition-old(root) {
+    animation: fade-out 200ms ease-in both;
+  }
+
+  ::view-transition-new(root) {
+    animation: fade-in 300ms ease-out both;
+  }
 </style>

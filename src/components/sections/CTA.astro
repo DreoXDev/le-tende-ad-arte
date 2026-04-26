@@ -28,46 +28,68 @@ import { Button } from "@/components/ui/button";
 			</div>
 
 			<div id="cta-form" class="bg-white dark:bg-card p-8 rounded-3xl shadow-2xl text-foreground opacity-0 translate-x-10 scale-95">
-				<!-- Il modulo inoltrerà in automatico i dati alla mail specificata in action -->
-				<form action="https://formsubmit.co/letendeadarte@gmail.com" method="POST" class="space-y-6">
-					<input type="hidden" name="_subject" value="Nuova richiesta preventivo dal sito Web Le Tende ad Arte">
-					<input type="hidden" name="_captcha" value="false">
-					<input type="hidden" name="_template" value="box">
-					<input type="hidden" name="_autoresponse" value="Grazie per la tua richiesta! Abbiamo ricevuto il tuo messaggio e ti contatteremo il prima possibile per studiare insieme la soluzione migliore. — Stefano, Le Tende ad Arte">
-					<input type="hidden" name="_next" value="https://letendeadarte.it/">
-					
-					<div class="grid sm:grid-cols-2 gap-4">
-						<div class="space-y-2">
-							<label class="text-sm font-bold uppercase tracking-widest text-muted-foreground">Nome</label>
-							<input type="text" name="nome" required class="w-full px-4 py-3 rounded-xl border border-border bg-secondary/20 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" />
+				<!-- Stato del Form (visibile di default) -->
+				<div id="form-state">
+					<!-- Il modulo inoltrerà in automatico i dati alla mail specificata in action -->
+					<form id="preventivo-form" action="https://formsubmit.co/ajax/letendeadarte@gmail.com" method="POST" class="space-y-6">
+						<input type="hidden" name="_subject" value="Nuova richiesta preventivo dal sito Web Le Tende ad Arte">
+						<input type="hidden" name="_captcha" value="false">
+						<input type="hidden" name="_template" value="box">
+						<input type="hidden" name="_autoresponse" value="Grazie per la tua richiesta! Abbiamo ricevuto il tuo messaggio e ti contatteremo il prima possibile per studiare insieme la soluzione migliore. — Stefano, Le Tende ad Arte">
+						
+						<div class="grid sm:grid-cols-2 gap-4">
+							<div class="space-y-2">
+								<label class="text-sm font-bold uppercase tracking-widest text-muted-foreground">Nome</label>
+								<input type="text" name="nome" required class="w-full px-4 py-3 rounded-xl border border-border bg-secondary/20 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" />
+							</div>
+							<div class="space-y-2">
+								<label class="text-sm font-bold uppercase tracking-widest text-muted-foreground">Cognome</label>
+								<input type="text" name="cognome" required class="w-full px-4 py-3 rounded-xl border border-border bg-secondary/20 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" />
+							</div>
+						</div>
+						<div class="grid sm:grid-cols-2 gap-4">
+							<div class="space-y-2">
+								<label class="text-sm font-bold uppercase tracking-widest text-muted-foreground">Email</label>
+								<input type="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-border bg-secondary/20 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" />
+							</div>
+							<div class="space-y-2">
+								<label class="text-sm font-bold uppercase tracking-widest text-muted-foreground">Telefono</label>
+								<input type="tel" name="telefono" class="w-full px-4 py-3 rounded-xl border border-border bg-secondary/20 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" />
+							</div>
 						</div>
 						<div class="space-y-2">
-							<label class="text-sm font-bold uppercase tracking-widest text-muted-foreground">Cognome</label>
-							<input type="text" name="cognome" required class="w-full px-4 py-3 rounded-xl border border-border bg-secondary/20 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" />
+							<label class="text-sm font-bold uppercase tracking-widest text-muted-foreground">Messaggio</label>
+							<textarea name="messaggio" rows="4" required class="w-full px-4 py-3 rounded-xl border border-border bg-secondary/20 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" placeholder="Descrivi il tuo progetto..."></textarea>
 						</div>
-					</div>
-					<div class="grid sm:grid-cols-2 gap-4">
-						<div class="space-y-2">
-							<label class="text-sm font-bold uppercase tracking-widest text-muted-foreground">Email</label>
-							<input type="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-border bg-secondary/20 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" />
+						<div class="flex items-center gap-3 py-2">
+							<input type="checkbox" required class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary" id="privacy" />
+							<label for="privacy" class="text-xs text-muted-foreground">Acconsento al trattamento dei dati personali (D.Lgs. 196/03)</label>
 						</div>
-						<div class="space-y-2">
-							<label class="text-sm font-bold uppercase tracking-widest text-muted-foreground">Telefono</label>
-							<input type="tel" name="telefono" class="w-full px-4 py-3 rounded-xl border border-border bg-secondary/20 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" />
-						</div>
+						<Button id="submit-btn" type="submit" size="lg" className="w-full rounded-xl h-14 text-white font-bold text-lg shadow-xl hover:shadow-2xl transition-all cursor-pointer">
+							Invia la Richiesta
+						</Button>
+						<!-- Messaggio di errore (nascosto di default) -->
+						<p id="form-error" class="hidden text-red-500 text-sm text-center font-medium">Si è verificato un errore. Riprova o contattaci direttamente via email.</p>
+					</form>
+				</div>
+
+				<!-- Stato di Successo (nascosto di default) -->
+				<div id="success-state" class="hidden flex-col items-center justify-center py-8 text-center gap-6">
+					<!-- Cerchio con checkmark animato -->
+					<div id="success-icon" class="relative flex items-center justify-center w-24 h-24">
+						<svg class="w-24 h-24" viewBox="0 0 100 100">
+							<circle id="success-circle" cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="4" class="text-primary" stroke-dasharray="283" stroke-dashoffset="283" />
+							<path id="success-check" d="M28 50 L44 66 L72 34" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" class="text-primary" stroke-dasharray="60" stroke-dashoffset="60" />
+						</svg>
 					</div>
-					<div class="space-y-2">
-						<label class="text-sm font-bold uppercase tracking-widest text-muted-foreground">Messaggio</label>
-						<textarea name="messaggio" rows="4" required class="w-full px-4 py-3 rounded-xl border border-border bg-secondary/20 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" placeholder="Descrivi il tuo progetto..."></textarea>
+					<div id="success-text" class="space-y-3 opacity-0">
+						<h3 class="text-2xl font-bold font-heading text-foreground">Richiesta Inviata!</h3>
+						<p class="text-muted-foreground leading-relaxed max-w-xs mx-auto">
+							Grazie! Stefano ti contatterà al più presto per organizzare il sopralluogo gratuito.
+						</p>
+						<p class="text-xs text-muted-foreground/60 mt-2">Controlla anche la casella spam per la nostra email di conferma.</p>
 					</div>
-					<div class="flex items-center gap-3 py-2">
-						<input type="checkbox" required class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary" id="privacy" />
-						<label for="privacy" class="text-xs text-muted-foreground">Acconsento al trattamento dei dati personali (D.Lgs. 196/03)</label>
-					</div>
-					<Button type="submit" size="lg" className="w-full rounded-xl h-14 text-white font-bold text-lg shadow-xl hover:shadow-2xl transition-all">
-						Invia la Richiesta
-					</Button>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -106,6 +128,89 @@ import { Button } from "@/components/ui/button";
 			scale: 1,
 			duration: 1.5,
 			ease: "elastic.out(1, 0.8)",
+		});
+
+		// ── Form Submit via Fetch ──────────────────────────────
+		const form = document.getElementById("preventivo-form") as HTMLFormElement | null;
+		const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement | null;
+		const formError = document.getElementById("form-error");
+		const formState = document.getElementById("form-state");
+		const successState = document.getElementById("success-state");
+
+		if (!form || !submitBtn) return;
+
+		form.addEventListener("submit", async (e) => {
+			e.preventDefault();
+
+			// Stato caricamento
+			submitBtn.disabled = true;
+			submitBtn.innerHTML = `
+				<svg class="animate-spin h-5 w-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+					<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+					<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+				</svg>
+			`;
+
+			try {
+				// ── Evitiamo di inviare email reali in fase di sviluppo ──
+				if (import.meta.env.DEV) {
+					console.log("Ambiente DEV: Invio form simulato. Nessuna email reale inviata.");
+					await new Promise((resolve) => setTimeout(resolve, 1500)); // Simula latenza di rete
+				} else {
+					const data = new FormData(form);
+					const response = await fetch(form.action, {
+						method: "POST",
+						body: data,
+						headers: { Accept: "application/json" },
+					});
+
+					if (!response.ok) throw new Error("Network error");
+				}
+
+				// ── Animazione successo ──
+				// 1. Nascondi form con slide-out
+				gsap.to(formState, {
+					opacity: 0,
+					y: -20,
+					duration: 0.4,
+					ease: "power2.in",
+					onComplete: () => {
+						formState!.classList.add("hidden");
+						successState!.classList.remove("hidden");
+						successState!.classList.add("flex");
+
+						// 2. Animazione cerchio SVG
+						gsap.to("#success-circle", {
+							strokeDashoffset: 0,
+							duration: 0.8,
+							ease: "power2.out",
+						});
+
+						// 3. Animazione checkmark (leggermente in ritardo)
+						gsap.to("#success-check", {
+							strokeDashoffset: 0,
+							duration: 0.5,
+							delay: 0.7,
+							ease: "power2.out",
+						});
+
+						// 4. Testo con fade-in
+						gsap.to("#success-text", {
+							opacity: 1,
+							y: 0,
+							duration: 0.6,
+							delay: 1.1,
+							ease: "power3.out",
+						});
+					},
+				});
+
+			} catch {
+				// Errore
+				submitBtn.disabled = false;
+				submitBtn.innerHTML = "Invia la Richiesta";
+				formError?.classList.remove("hidden");
+			}
 		});
 	});
 </script>

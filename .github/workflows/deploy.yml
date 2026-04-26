@@ -24,6 +24,11 @@ jobs:
         uses: withastro/action@v3
         with:
           node-version: 22
+        env:
+          # Aggiungi il token GA nelle Secrets della repo GitHub:
+          # Settings → Secrets and variables → Actions → New repository secret
+          # Nome: GA_MEASUREMENT_ID  Valore: G-XXXXXXXXXX (il tuo ID reale)
+          PUBLIC_GA_ID: ${{ secrets.GA_MEASUREMENT_ID }}
 
   deploy:
     needs: build

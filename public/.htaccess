@@ -1,0 +1,54 @@
+# ===================================================
+#  Le Tende ad Arte - Apache Configuration (.htaccess)
+#  Compatibile con hosting Aruba Linux
+# ===================================================
+
+# --- Abilita il modulo di riscrittura URL ---
+Options -MultiViews
+RewriteEngine On
+
+# --- Forza HTTPS (attivare dopo aver configurato SSL su Aruba) ---
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# --- Reindirizza www → non-www (o viceversa, scegliere uno solo) ---
+# RewriteCond %{HTTP_HOST} ^www\.letendeadarte\.it [NC]
+# RewriteRule ^(.*)$ https://letendeadarte.it/$1 [R=301,L]
+
+# --- Serve i file statici di Astro correttamente ---
+# Se esiste il file fisico, servilo direttamente
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Se esiste la directory con index.html, servila
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Altrimenti prova a servire il file .html corrispondente
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# Pagina 404 personalizzata (generata da Astro)
+ErrorDocument 404 /404.html
+
+# --- Compressione Gzip per performance ---
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# --- Cache del browser per performance ---
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/ico "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# --- Sicurezza: nascondi la versione del server ---
+ServerSignature Off
