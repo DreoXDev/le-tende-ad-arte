@@ -72,7 +72,7 @@ const ogImage = new URL(
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lobster&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap"
       rel="stylesheet"
     />
 
@@ -167,7 +167,8 @@ const ogImage = new URL(
 <style is:global>
   :root {
     --font-sans: "Inter", sans-serif;
-    --font-heading: "Lobster", cursive;
+    --font-heading: "Playfair Display", cursive;
+    --font-navbartitle: "Lobster", cursive;
   }
 
   h1,
@@ -183,7 +184,12 @@ const ogImage = new URL(
   body,
   p,
   span,
-  h1, h2, h3, h4, h5, h6,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
   li,
   label,
   div,
@@ -209,13 +215,25 @@ const ogImage = new URL(
 
   /* ── Transizioni di pagina fluide (Astro ClientRouter) ── */
   @keyframes fade-in {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @keyframes fade-out {
-    from { opacity: 1; transform: translateY(0); }
-    to   { opacity: 0; transform: translateY(-8px); }
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
   }
 
   ::view-transition-old(root) {

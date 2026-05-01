@@ -1,0 +1,19 @@
+# Le Tende ad Arte
+
+Sito web per "Le Tende ad Arte", negozio di Abbiategrasso (MI) specializzato in tende da interno, tende da sole, zanzariere, pergole, tapparelle e veneziane. 
+Il sito ha l'obiettivo di fornire una vetrina elegante e moderna dei prodotti, evidenziare i punti di forza del negozio ("Il Nostro Metodo"), e consentire agli utenti di richiedere un preventivo gratuito.
+
+## Pagine Principali
+- Home (https://letendeadarte.it/)
+- Privacy & Cookie Policy (https://letendeadarte.it/privacy)
+
+## Pagine Prodotti
+- Tende da Interno (https://letendeadarte.it/prodotti/tende-da-interno)
+- Tende da Sole (https://letendeadarte.it/prodotti/tende-da-sole)
+- Zanzariere (https://letendeadarte.it/prodotti/zanzariere)
+- Veneziane (https://letendeadarte.it/prodotti/veneziane)
+- Tapparelle (https://letendeadarte.it/prodotti/tapparelle)
+- Pergole (https://letendeadarte.it/prodotti/pergole)
+
+Per il contenuto completo e indicizzabile dagli LLM, vedi il file [llms-full.txt](https://letendeadarte.it/llms-full.txt).
+Per l'indice completo dei link, vedi la [Sitemap](https://letendeadarte.it/sitemap-index.xml).
